@@ -11,15 +11,11 @@ export ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="agnoster"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -61,23 +57,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH=$HOME/bin:$PATH
 export EDITOR=vim
-# export MANPATH="/usr/local/man:$MANPATH"
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
 DEFAULT_USER=dominik
 
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
@@ -97,7 +77,7 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
-alias diffscreens='cd /Users/dominik/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
+alias diffscreens='cd ~/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
 alias dm='/usr/local/bin/docker-machine'
 alias mux=tmuxinator
 alias subl='reattach-to-user-namespace subl'
@@ -106,7 +86,7 @@ alias open='reattach-to-user-namespace open'
 alias dokku='bash $HOME/code/infrastructure/dokku/contrib/dokku_client.sh'
 alias zcat='gunzip -c'
 export TERM=screen-256color
-export BUNDLER_EDITOR=subl
+export BUNDLER_EDITOR=vim
 export NVM_DIR=~/.nvm
 #source $(brew --prefix nvm)/nvm.sh
 lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
