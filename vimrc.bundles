@@ -17,14 +17,13 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'mileszs/ack.vim'
 Plug 'junegunn/vim-easy-align'
-" Plug 'scrooloose/nerdtree'
-" Plug 'scrooloose/nerdcommenter'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'easymotion/vim-easymotion'
-" not working ... somehow
+
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'christoomey/vim-tmux-runner'
 
 Plug 'stephpy/vim-yaml'
 Plug 'kchmck/vim-coffee-script'
@@ -45,7 +44,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
-" Plug 'altercation/vim-colors-solarized'
 
 
 " Initialize plugin system

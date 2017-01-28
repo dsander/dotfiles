@@ -111,6 +111,7 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>so :source ~/.vimrc<cr>:PlugInstall<cr>
 map <leader>sn :source ~/.vimrc<cr>
 map <leader>h :nohlsearch<cr>
+map <Leader>p :set paste<CR><esc>"*]p:set nopaste<cr>
 
 " vim-test mappings
 nnoremap <silent> <Leader>t :TestFile<CR>
@@ -118,7 +119,18 @@ nnoremap <silent> <Leader>s :TestNearest<CR>
 nnoremap <silent> <Leader>l :TestLast<CR>
 nnoremap <silent> <Leader>a :TestSuite<CR>
 nnoremap <silent> <leader>gt :TestVisit<CR>
-map <Leader>p :set paste<CR><esc>"*]p:set nopaste<cr>
+
+nnoremap <leader>rr :VtrResizeRunner<cr>
+nnoremap <leader>ror :VtrReorientRunner<cr>
+nnoremap <leader>sc :VtrSendCommandToRunner<cr>
+vnoremap <leader>sl :VtrSendLinesToRunner<cr>
+nnoremap <leader>or :VtrOpenRunner<cr>
+nnoremap <leader>kr :VtrKillRunner<cr>
+nnoremap <leader>fr :VtrFocusRunner<cr>
+nnoremap <leader>dr :VtrDetachRunner<cr>
+nnoremap <leader>ar :VtrReattachRunner<cr>
+nnoremap <leader>cr :VtrClearRunner<cr>
+nnoremap <leader>fc :VtrFlushCommand<cr>
 
 " Swap 0 and ^. I tend to want to jump to the first non-whitesapce character
 " so make that the easier one to do.
