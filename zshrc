@@ -53,29 +53,41 @@ plugins=(git bundler cap rails ruby coffee docker gem git-flow tmuxinator histor
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export PATH=$HOME/bin:$PATH
 export EDITOR=vim
-
-DEFAULT_USER=dominik
+export TERM=screen-256color
+export DEFAULT_USER=dominik
+export BUNDLER_EDITOR=vim
 
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-eval "$(rbenv init -)"
+
+# Add homebrew
 export PATH=/usr/local/sbin:$PATH
+
+# rbenv
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-#export PATH=/usr/local/bin:/opt/webOS_TV_SDK/CLI/bin:$PATH
-export PATH="$HOME/.rbenv/bin:$PATH"
+# nvm
+export NVM_DIR=~/.nvm
+lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
 
+test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
- #added by travis gem
+# kiex elixir version manager
+test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+
+# added by travis gem
 [ -f /Users/dominik/.travis/travis.sh ] && source /Users/dominik/.travis/travis.sh
 
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+
+# Aliases
 
 alias diffscreens='cd ~/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
 alias dm='/usr/local/bin/docker-machine'
@@ -85,11 +97,4 @@ alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
 alias dokku='bash $HOME/code/infrastructure/dokku/contrib/dokku_client.sh'
 alias zcat='gunzip -c'
-export TERM=screen-256color
-export BUNDLER_EDITOR=vim
-export NVM_DIR=~/.nvm
-#source $(brew --prefix nvm)/nvm.sh
-lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
 
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
