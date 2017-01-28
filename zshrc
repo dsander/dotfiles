@@ -64,8 +64,11 @@ export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 # Add homebrew
 export PATH=/usr/local/sbin:$PATH
 
-# rbenv
-eval "$(rbenv init -)"
+# lazy load rbenv
+rbenv() {
+  eval "$(command rbenv init -)"
+  rbenv "$@"
+}
 export PATH="$HOME/.rbenv/bin:$PATH"
 
 ### Added by the Heroku Toolbelt
