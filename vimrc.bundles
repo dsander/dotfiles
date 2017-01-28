@@ -1,0 +1,53 @@
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
+call plug#begin('~/.vim/plugged')
+
+" General
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-run-interactive'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+" Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-fugitive'
+Plug 'shumphrey/fugitive-gitlab.vim'
+Plug 'pbrisbin/vim-mkdir'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'mileszs/ack.vim'
+Plug 'junegunn/vim-easy-align'
+" Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdcommenter'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'easymotion/vim-easymotion'
+" not working ... somehow
+Plug 'janko-m/vim-test'
+Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
+
+Plug 'stephpy/vim-yaml'
+Plug 'kchmck/vim-coffee-script'
+Plug 'tpope/vim-haml'
+
+" Ruby / Rails
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-rake'
+Plug 'thoughtbot/vim-rspec'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+
+" Theme / Colors
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+" Plug 'altercation/vim-colors-solarized'
+
+
+" Initialize plugin system
+call plug#end()
+
