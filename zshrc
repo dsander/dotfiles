@@ -1,3 +1,7 @@
+lazy_source () {
+  eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
+}
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -48,7 +52,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler cap rails ruby command-not-found coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast)
+plugins=(git bundler cap rails ruby coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,12 +105,11 @@ alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
 alias dokku='bash $HOME/code/infrastructure/dokku/contrib/dokku_client.sh'
 alias zcat='gunzip -c'
-# alias tmux='tmux -2'
 export TERM=screen-256color
 export BUNDLER_EDITOR=subl
 export NVM_DIR=~/.nvm
 #source $(brew --prefix nvm)/nvm.sh
-source "/usr/local/opt/nvm/nvm.sh"
+lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
 
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
