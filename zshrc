@@ -81,13 +81,13 @@ lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 
 # kiex elixir version manager
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+lazy_source kiex "$HOME/.kiex/scripts/kiex"
 
 # added by travis gem
 [ -f /Users/dominik/.travis/travis.sh ] && source /Users/dominik/.travis/travis.sh
 
 # autojump
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+lazy_source j "/usr/local/etc/profile.d/autojump.sh"
 
 
 # Aliases
