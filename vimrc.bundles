@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 " General
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'christoomey/vim-run-interactive'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'

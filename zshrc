@@ -2,6 +2,10 @@ lazy_source () {
   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 }
 
+# focus events enabled for terminals that support them
+# needed for vim autoread
+tmux set-option -g focus-events on
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 

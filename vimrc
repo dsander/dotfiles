@@ -65,6 +65,10 @@ let mapleader = " "
 set nobackup
 set nowritebackup
 set history=200
+
+" auto read changes from the filesystem
+set autoread
+
 " END Defaults
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
