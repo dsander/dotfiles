@@ -167,7 +167,7 @@ bindkey '^g^g' fuzzy-git-shalector
 
 alias diffscreens='cd ~/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
 alias dm='/usr/local/bin/docker-machine'
-alias mux=tmuxinator
+alias mux='eval "$(command rbenv init -)"; tmuxinator'
 alias subl='reattach-to-user-namespace subl'
 alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
