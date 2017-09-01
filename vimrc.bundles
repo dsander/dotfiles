@@ -46,6 +46,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 
+Plug 'rust-lang/rust.vim'
+
 
 " Initialize plugin system
 call plug#end()
