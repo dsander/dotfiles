@@ -175,6 +175,5 @@ alias mux='eval "$(command rbenv init -)"; tmuxinator'
 alias subl='reattach-to-user-namespace subl'
 alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
-alias dokku='bash $HOME/code/infrastructure/dokku/contrib/dokku_client.sh'
 alias zcat='gunzip -c'
 
