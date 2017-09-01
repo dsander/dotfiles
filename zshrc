@@ -53,11 +53,15 @@ plugins=(git bundler cap rails ruby coffee docker gem git-flow tmuxinator histor
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/bin:$PATH
 export EDITOR=vim
 export TERM=screen-256color
 export DEFAULT_USER=dominik
 export BUNDLER_EDITOR=vim
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+
+# VS Code
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
