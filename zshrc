@@ -48,7 +48,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler cap rails ruby coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast)
+plugins=(git bundler cap rails ruby coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast cargo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -58,7 +58,6 @@ export EDITOR=vim
 export TERM=screen-256color
 export DEFAULT_USER=dominik
 export BUNDLER_EDITOR=vim
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 
 # VS Code
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
@@ -176,4 +175,5 @@ alias subl='reattach-to-user-namespace subl'
 alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
 alias zcat='gunzip -c'
+alias nhssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 
