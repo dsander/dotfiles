@@ -199,34 +199,23 @@ set updatetime=250
 set signcolumn=yes
 
 
-" Ctrlp
-" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
-if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-
-  if !exists(":Ag")
-    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-    nnoremap \ :Ag<SPACE>
-  endif
+if executable('rg')
+  " Ctrlp
+	set grepprg=rg\ --color=never
+	let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+	let g:ctrlp_use_caching = 0
+  " grep and Ack
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+  let g:ackprg = 'rg --vimgrep --no-heading'
 endif
+vnoremap <Leader>gg y:Ack! --fixed-strings <C-r>=shellescape(fnameescape(@"))<CR><CR>
 
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_eruby_ruby_quiet_messages =
     \ {"regex": "possibly useless use of a variable in void context"}
-
-" Use ag when available
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
 
 let g:fugitive_gitlab_domains = ['https://git.dsander.de', 'http://gitlab.flavoursys.lan']
 

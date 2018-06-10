@@ -176,4 +176,4 @@ alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
 alias zcat='gunzip -c'
 alias nhssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-
+unalias rg
