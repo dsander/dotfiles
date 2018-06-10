@@ -263,4 +263,10 @@ let g:rspec_runner = "dispatch"
 " let g:rspec_command = "!clear && bin/rspec {spec}"
 " let g:rspec_command = "compiler rspec | set makeprg=bundle\\ exec\\ rspec | make {spec}"
 
+" Required for operations modifying multiple buffers like rename.
+set hidden
 
+let g:LanguageClient_serverCommands = {
+		\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+		\ }
+let g:rustfmt_autosave = 1
