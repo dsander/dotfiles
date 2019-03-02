@@ -67,24 +67,13 @@ export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 # Add homebrew
 export PATH=/usr/local/sbin:$PATH
 
-# lazy load rbenv
-rbenv() {
-  eval "$(command rbenv init -)"
-  rbenv "$@"
-}
-export PATH="$HOME/.rbenv/bin:$PATH"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
-# nvm
-export NVM_DIR=~/.nvm
-lazy_source nvm "/usr/local/opt/nvm/nvm.sh"
-
 test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-
-# kiex elixir version manager
-lazy_source kiex "$HOME/.kiex/scripts/kiex"
 
 # added by travis gem
 [ -f /Users/dominik/.travis/travis.sh ] && source /Users/dominik/.travis/travis.sh
@@ -170,7 +159,7 @@ bindkey '^g^g' fuzzy-git-shalector
 
 alias diffscreens='cd ~/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
 alias dm='/usr/local/bin/docker-machine'
-alias mux='eval "$(command rbenv init -)"; tmuxinator'
+alias mux='tmuxinator'
 alias subl='reattach-to-user-namespace subl'
 alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
