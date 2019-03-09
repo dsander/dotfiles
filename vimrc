@@ -269,4 +269,7 @@ set hidden
 let g:LanguageClient_serverCommands = {
 		\ 'rust': ['rustup', 'run', 'nightly', 'rls'],
 		\ }
+nnoremap <leader>d :call LanguageClient#textDocument_definition()<cr>
 let g:rustfmt_autosave = 1
+
+let g:deoplete#enable_at_startup = 1
