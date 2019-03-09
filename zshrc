@@ -108,6 +108,8 @@ function _pbcopy_last_command(){
 zle -N pbcopy-last-command _pbcopy_last_command
 bindkey '^x^y' pbcopy-last-command
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Fuzzy match against history, edit selected value
 _uniqe_without_sort() { awk '!x[$0]++' }
 _fuzzy_history() {
