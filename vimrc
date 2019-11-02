@@ -16,7 +16,11 @@ set guifont=Menlo\ for\ Powerline:h13
 
 
 " Set Theme
-colorscheme jellybeans
+try
+  colorscheme jellybeans
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+endtry
 let g:airline_powerline_fonts = 1
 set t_Co=256
 " set term=xterm-256color
