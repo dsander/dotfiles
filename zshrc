@@ -4,6 +4,8 @@ lazy_source () {
   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 }
 
+OS=$(uname)
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -55,35 +57,6 @@ HISTSIZE=$SAVEHIST
 plugins=(git bundler rails ruby coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast cargo terraform)
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-export PATH=$HOME/.cargo/bin:$HOME/bin:$PATH
-export EDITOR=vim
-export TERM=screen-256color
-export DEFAULT_USER=dominik
-export BUNDLER_EDITOR=vim
-
-# VS Code
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-
-# Add homebrew
-export PATH=/usr/local/sbin:$PATH
-
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
-
-# added by travis gem
-[ -f /Users/dominik/.travis/travis.sh ] && source /Users/dominik/.travis/travis.sh
-
-# autojump
-lazy_source j "/usr/local/etc/profile.d/autojump.sh"
 
 # handy keybindings
 bindkey "^s" beginning-of-line
@@ -161,8 +134,47 @@ zle -N fuzzy-git-shalector _fuzzy_git_shalector
 bindkey '^g^g' fuzzy-git-shalector
 
 
-# Aliases
+# User configuration
+export EDITOR=vim
+export TERM=screen-256color
+export DEFAULT_USER=dominik
+export BUNDLER_EDITOR=vim
 
+
+# PATH manipulation
+export PATH=$HOME/.cargo/bin:$HOME/bin:$PATH
+if [[ "${OS}" == "Darwin" ]]; then
+  export HOMEBREW_PREFIX="/usr/local"
+
+  export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+  export PATH="/usr/local/heroku/bin:$PATH"
+
+  test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+else
+  export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+fi
+
+export HOMEBREW_CELLAR="${HOMEBREW_PREFIX}/Cellar"
+export HOMEBREW_REPOSITORY="${HOMEBREW_PREFIX}/Homebrew"
+export PATH="${HOMEBREW_PREFIX}/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"
+export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
+export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
+
+
+# Integrations & completions
+if [[ "${OS}" == "Darwin" ]]; then
+  test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+else
+fi
+
+lazy_source j "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh"
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+
+
+# Aliases
 alias diffscreens='cd ~/Dropbox/Screenshots && compare -density 300 "`ls -tr | tail -2|head -1`" "`ls -tr | tail -1`" -compose src diff.png; open diff.png'
 alias dm='/usr/local/bin/docker-machine'
 alias mux='tmuxinator'
