@@ -54,6 +54,8 @@ HISTSIZE=$SAVEHIST
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+UNBUNDLED_COMMANDS=(annotate cap capify cucumber foodcritic guard hanami irb jekyll kitchen knife middleman nanoc pry puma rackup rainbows rake rspec rubocop shotgun sidekiq spec spork spring strainer tailor taps thin thor unicorn unicorn_rails ify _rails)
+
 plugins=(git bundler rails ruby coffee docker gem git-flow tmuxinator history-substring-search vagrant mix-fast cargo terraform)
 
 source $ZSH/oh-my-zsh.sh
