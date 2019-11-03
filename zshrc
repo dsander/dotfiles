@@ -1,3 +1,5 @@
+# zmodload zsh/zprof
+
 lazy_source () {
   eval "$1 () { [ -f $2 ] && source $2 && $1 \$@ }"
 }
@@ -169,3 +171,5 @@ alias macvim='reattach-to-user-namespace macvim'
 alias open='reattach-to-user-namespace open'
 alias zcat='gunzip -c'
 alias nhssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+
+# zprof
