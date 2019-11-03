@@ -45,6 +45,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
+Plug 'machakann/vim-highlightedyank'
 
 Plug 'rust-lang/rust.vim'
 Plug 'autozimu/LanguageClient-neovim', {
