@@ -116,7 +116,7 @@ zplugin snippet https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
 zplugin ice wait lucid
 zplugin snippet https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 
-zplugin ice wait lucid
+zplugin ice light lucid
 zplugin load kiurchv/asdf.plugin.zsh
 
 zplugin ice wait lucid blockf
