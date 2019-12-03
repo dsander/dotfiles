@@ -299,6 +299,9 @@ call plug#begin('~/.vim/plugged')
 
   " `cp`/`cP` to copy, `cv`/``cV` to paste
   Plug 'christoomey/vim-system-copy'
+
+  " highlight the word under the cursor
+  Plug 'RRethy/vim-illuminate'
 " }}}
 
 " Text objects {{{
@@ -662,6 +665,7 @@ call plug#end() " Initialize plugin system
 
   syntax on
   filetype plugin indent on
+  hi illuminatedWord guibg=#333333
 " }}}
 
 " vim: ft=vim foldmethod=marker foldlevel=0
