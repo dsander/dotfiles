@@ -564,6 +564,9 @@ call plug#begin('~/.vim/plugged')
 " }}}
 
 " Language specific {{{
+  " polygot - contains a bunch of language plugin
+  Plug 'sheerun/vim-polyglot'
+
   " html {{{
     " emmet support for vim - easily create markdup wth CSS-like syntax
     Plug 'mattn/emmet-vim'
@@ -571,17 +574,12 @@ call plug#begin('~/.vim/plugged')
     " match tags in html, similar to paren support
     Plug 'gregsexton/MatchTag', { 'for': 'html' }
 
-    " html5 support
-    Plug 'othree/html5.vim', { 'for': 'html' }
-
   " }}}
 
   " " Ruby {{{
-    Plug 'vim-ruby/vim-ruby'
     Plug 'tpope/vim-bundler'
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-rake'
-    Plug 'tpope/vim-haml'
     " `ir`, `ar` mappings for ruby code blocks
     Plug 'nelstrom/vim-textobj-rubyblock'
     Plug 'thoughtbot/vim-rspec'
@@ -600,19 +598,11 @@ call plug#begin('~/.vim/plugged')
   " }}}
 
   " Templates / Config file formats {{{
-    Plug 'cespare/vim-toml'
-    Plug 'stephpy/vim-yaml'
-    Plug 'elzr/vim-json', { 'for': 'json' }
-    let g:vim_json_syntax_conceal = 0
-
     function! s:PrettyJSON()
       %!jq .
       set filetype=json
     endfunction
     command! PrettyJSON :call <sid>PrettyJSON()
-
-    Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-    let g:markdown_fenced_languages = [ 'tsx=typescript.tsx' ]
 
     " Open markdown files in Marked.app - mapped to <leader>m
     Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' }
@@ -620,32 +610,18 @@ call plug#begin('~/.vim/plugged')
     nmap <leader>mdq :MarkedQuit<cr>
     nmap <leader>* *<c-o>:%s///gn<cr>
 
-    " mustache support
-    Plug 'mustache/vim-mustache-handlebars'
-
-    " pug / jade support
-    Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }
   " }}}
 
   " JavaScript {{{
-    Plug 'kchmck/vim-coffee-script'
     Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
     Plug 'moll/vim-node', { 'for': 'javascript' }
     Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
-    Plug 'MaxMEllon/vim-jsx-pretty'
-    let g:vim_jsx_pretty_highlight_close_tag = 1
   " }}}
 
   " Styles {{{
-    Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }
-    Plug 'groenewege/vim-less', { 'for': 'less' }
     Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
-    Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
     Plug 'stephenway/postcss.vim', { 'for': 'css' }
   " }}}
-
-  Plug 'ekalinin/Dockerfile.vim'
-  Plug 'rust-lang/rust.vim'
 " }}}
 
 call plug#end() " Initialize plugin system
