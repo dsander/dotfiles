@@ -19,7 +19,8 @@ call plug#begin('~/.vim/plugged')
   endif
 
   " Searching
-  set ignorecase " searches are case insensitive...
+  set infercase " Smart casing when completing
+  set ignorecase " Search in case-insensitively
   set smartcase " ... unless they contain at least one capital letter
   set hlsearch " highlight matches
   set incsearch " incremental searching
@@ -46,10 +47,19 @@ call plug#begin('~/.vim/plugged')
 
   set nojoinspaces " use one space, not two, after punctuation.
   set complete+=kspell " autocomplete with dictionary words when spell check is on
+
+  " Set the persistent undo directory on temporary private fast storage.
+  let s:undoDir=$HOME . "/.vim-undodir" . $USER
+  if !isdirectory(s:undoDir)
+      call mkdir(s:undoDir, "", 0700)
+  endif
+  let &undodir=s:undoDir
+  set undofile          " Maintain undo history
 " }}}
 
 " Appearance {{{
-  set number " show line numbers"
+  set number " Show line numbers
+  set relativenumber " show relative line numbers"
   set wrap " wrap lines
   set linebreak " wrap lines at breakat
   set showbreak=… " show ellipsis at breaking"
@@ -59,6 +69,7 @@ call plug#begin('~/.vim/plugged')
   set laststatus=2  " Always display the status line
   set scrolloff=7 " minimunm amount of lines above and below cursor
   set wildmenu " enhanced command line completion"
+  set wildmode=full
   set hidden " required for operations modifying multiple buffers like rename.
   set showcmd " display incomplete commands
   set noshowmode " powerline shows the mode
@@ -70,6 +81,9 @@ call plug#begin('~/.vim/plugged')
   set updatetime=250 " update swp file, fire CursorHold event
   set signcolumn=yes " show column next to line numbers (used by git gutter)
   set shortmess+=c " don't give ins-completion-menu messages"
+  set breakindent " prettyier word wraps
+  set breakindentopt=shift:2
+  set showbreak=↳
 
   " Tab control
   set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
@@ -121,9 +135,9 @@ call plug#begin('~/.vim/plugged')
   " space is our leader
   let mapleader = " "
 
-  " j and k move into wrapped lines
-  nmap k gk
-  nmap j gj
+  " jump over wrapped lines, but only when no cound is given, set mark when jumping far
+  nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+  nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
   " Remap the arrow keys to do nothing
   nnoremap <Left> :echoe "Use h"<CR>
@@ -181,6 +195,50 @@ call plug#begin('~/.vim/plugged')
   " scroll the viewport faster
   nnoremap <C-e> 3<C-e>
   nnoremap <C-y> 3<C-y>
+
+  " Y yanks until the end of line
+  noremap Y y$
+
+  "-----------------------------
+  " Readline-like mappings
+  "-----------------------------
+  " - Ctrl-a - go to the start of line
+  " - Ctrl-e - go to the end of the line
+  " - Alt-b  - back a word
+  " - Alt-f  - forward a word
+  " - Alt-BS - delete backward word
+  " - Alt-d  - delete forward word
+  inoremap <C-a>  <C-o>^
+  inoremap <C-e>  <C-o>$
+  inoremap <A-b>  <C-Left>
+  inoremap <A-f>  <C-Right>
+  inoremap <A-BS> <C-w>
+  inoremap <A-d>  <C-o>dw
+  " As above but for command mode.
+  cnoremap <C-a>  <Home>
+  cnoremap <C-e>  <End>
+  cnoremap <A-b>  <C-Left>
+  cnoremap <A-f>  <C-Right>
+  cnoremap <A-BS> <C-w>
+  cnoremap <A-d>  <C-Right><C-w>
+
+  "-----------------------------
+  " Completion mappings
+  "-----------------------------
+  " - ]     - 'tags' file completion
+  " - Space - context aware omni completion (via 'omnifunc' setting)
+  " - b     - keyword completion from the current buffer (<C-n><C-b> to extend)
+  " - d     - dictionary completion (via 'dictionary' setting)
+  " - f     - file path completion
+  " - l     - line completion (repeat an existing line)
+  " inoremap <C-]>     <C-x><C-]>
+  " inoremap <C-Space> <C-x><C-o>
+  " inoremap <C-b>     <C-x><C-p>
+  " inoremap <C-d>     <C-x><C-k>
+  " inoremap <C-f>     <C-x><C-f>
+  " inoremap <C-l>     <C-x><C-l>
+  " " - c - term completion that combines the sources of the 'complete' option
+  " inoremap <expr> <C-c> pumvisible() ? "\<C-e>\<C-n>": "\<C-n>"
 " }}}
 
 " {{{ Project Notes
@@ -205,11 +263,49 @@ call plug#begin('~/.vim/plugged')
   endfunction
 " }}}
 
+" Functions {{{
+
+  " Display relative line numbers in the active window and display absolute
+  " numbers in inactive windows.
+  "
+  function! s:RelativeNumberActivity(mode) abort
+    if &diff
+      " For diffs, do nothing since we want relativenumbers in all windows.
+      return
+    endif
+    if &buftype == "nofile" || &buftype == "nowrite"
+      setlocal nonumber
+    elseif a:mode == "active"
+      setlocal relativenumber
+    else
+      setlocal norelativenumber
+    endif
+  endfunction
+
+  " Toggle spelling mode, add the dictionary to the completion list of
+  " sources if spelling mode has been entered, otherwise remove it.
+  "
+  function! s:SpellingToggle() abort
+    setlocal spell!
+    if &spell
+      set complete+=kspell
+      echo "Spell mode enabled"
+    else
+      set complete-=kspell
+      echo "Spell mode disabled"
+    endif
+  endfunction
+
+  nnoremap <F5>     :call <SID>SpellingToggle()<CR>
+  nnoremap <Space>5 :call <SID>SpellingToggle()<CR>
+
+" }}}
+
 " AutoGroups {{{
   augroup configgroup
     autocmd!
     " automatically rebalance windows on vim resize
-    autocmd VimResized * exe 'normal! \<c-w>='
+    autocmd VimResized * wincmd =
 
     " save all files on focus lost, ignoring warnings about untitled buffers
     autocmd FocusLost * silent! wa
@@ -218,6 +314,13 @@ call plug#begin('~/.vim/plugged')
     " when there are multiple windows open
     autocmd FileType qf wincmd J
     autocmd FileType qf nmap <buffer> q :q<cr>
+
+    autocmd WinEnter * call s:RelativeNumberActivity("active")
+    autocmd WinLeave * call s:RelativeNumberActivity("inactive")
+
+    " Syntax highlight a minimum of 2,000 lines. This greatly helps scroll
+    " performance.
+    autocmd Syntax * syntax sync minlines=2000
   augroup END
 " }}}
 
@@ -227,8 +330,23 @@ call plug#begin('~/.vim/plugged')
     runtime! macros/matchit.vim
   endif
 
-  " search inside files using ripgrep. This plugin provides an Ack command.
-  Plug 'wincent/ferret'
+  " search inside files using 
+  Plug 'mhinz/vim-grepper'
+  let g:grepper       = {}
+  let g:grepper.tools = ["rg"]
+  let g:grepper.highlight  = 1
+  let g:grepper.stop  = 1000
+
+  " Search for user-supplied term.
+  nnoremap <Leader>/ :GrepperRg<Space>
+  " Search for current word or selection.
+  nnoremap gs :Grepper -cword -noprompt<CR>
+  xmap gs <Plug>(GrepperOperator)
+
+  " session management
+  Plug 'tpope/vim-obsession'
+  noremap <Leader>o :Obsession<CR>
+  noremap <Leader>O :Obsession!<CR>
 
   " easy commenting motions
   Plug 'tpope/vim-commentary'
@@ -244,6 +362,8 @@ call plug#begin('~/.vim/plugged')
 
   " enables repeating other supported plugins with the . command
   Plug 'tpope/vim-repeat'
+  " map U to redo
+  nmap U <Plug>(RepeatRedo)
 
   " .editorconfig support
   Plug 'editorconfig/editorconfig-vim'
@@ -302,6 +422,23 @@ call plug#begin('~/.vim/plugged')
 
   " highlight the word under the cursor
   Plug 'RRethy/vim-illuminate'
+
+  " Make f and t repeatable
+  Plug 'rhysd/clever-f.vim'
+
+  Plug 'mbbill/undotree'
+  let g:undotree_HighlightChangedWithSign = 0
+  let g:undotree_WindowLayout             = 4
+  nnoremap <Leader>u :UndotreeToggle<CR>
+
+  Plug 'gcmt/taboo.vim'
+  let g:taboo_tab_format = " tab:%N%m "
+
+  nnoremap <Leader>1 1gt
+  nnoremap <Leader>2 2gt
+  nnoremap <Leader>3 3gt
+  nnoremap <Leader>4 4gt
+  nnoremap <Leader>5 5gt
 " }}}
 
 " Text objects {{{
@@ -317,7 +454,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'beloglazov/vim-textobj-quotes'
   " `ac` and `ic` mappings to work with code blocks
   Plug 'christoomey/vim-textobj-codeblock'
-""" }}}
+  " adds a bunch of textobjects like `i,`
+  Plug 'wellle/targets.vim'
+
+"" }}}
 
 " Themes {{{
   Plug 'nanotech/jellybeans.vim'
@@ -379,6 +519,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   let g:fzf_layout = { 'down': '~25%' }
+  Plug 'pbogut/fzf-mru.vim'
+
+ " let g:fzf_commits_log_options = '--graph --color=always
+  "       \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
+  "       \ - %C(#42cf89)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
   if isdirectory(".git")
     " if in a git project, use :GFiles
@@ -388,13 +533,19 @@ call plug#begin('~/.vim/plugged')
     nmap <silent> <C-p> :FZF<cr>
   endif
 
-  nmap <silent> <leader>s :GFiles?<cr>
+  nnoremap <silent> <leader><Space> :Files<CR>
+  nnoremap <silent> <leader>,       :Buffers<CR>
+  nnoremap <silent> <leader><BS>    :BDelete<CR>
+  nnoremap <silent> <leader>]       :Tags<CR>
+  nnoremap <silent> <leader>[       :BTags<CR>
+  nnoremap <silent> <leader>c       :BCommits<CR>
+  nnoremap <silent> <leader>g       :GFiles?<CR>
+  nnoremap <silent> <leader>h       :Helptags<CR>
 
-  nmap <silent> <leader>r :Buffers<cr>
-  nmap <silent> <leader>e :FZF<cr>
-  nmap <leader><tab> <plug>(fzf-maps-n)
-  xmap <leader><tab> <plug>(fzf-maps-x)
-  omap <leader><tab> <plug>(fzf-maps-o)
+  nmap <leader>? <plug>(fzf-maps-n)
+  xmap <leader>? <plug>(fzf-maps-x)
+  omap <leader>? <plug>(fzf-maps-o)
+  imap <C-x>?   <Plug>(fzf-maps-i)
 
   " Insert mode completion
   imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -411,12 +562,17 @@ call plug#begin('~/.vim/plugged')
         \   'left':    30
         \ })<CR>
 
-  command! FZFMru call fzf#run({
-        \  'source':  v:oldfiles,
-        \  'sink':    'e',
-        \  'options': '-m -x +s',
-        \  'down':    '40%'})
+  " command! FZFMru call fzf#run({
+  "       \  'source':  v:oldfiles,
+  "       \  'sink':    'e',
+  "       \  'options': '-m -x +s',
+  "       \  'down':    '40%'})
+  nnoremap <silent> <Space>m :FZFMru<CR>
 
+  command! -bang -nargs=* Rg
+        \ call fzf#vim#grep(
+        \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview(), <bang>0)
   command! -bang -nargs=* Find call fzf#vim#grep(
         \ 'rg --column --line-number --no-heading --follow --color=always '.<q-args>, 1,
         \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
@@ -426,7 +582,7 @@ call plug#begin('~/.vim/plugged')
         \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 " }}}
 
-" vim-fugitive {{{
+" git {{{
   Plug 'tpope/vim-fugitive'
   nmap <silent> <leader>gs :Gstatus<cr>
   nmap <leader>ge :Gedit<cr>
@@ -439,6 +595,11 @@ call plug#begin('~/.vim/plugged')
 
   " GitHub integration 
   Plug 'tpope/vim-rhubarb'
+
+  " Show commit messages for the current line
+  Plug 'rhysd/git-messenger.vim'
+  let g:git_messenger_no_default_mappings = v:true
+  nmap <Leader>M <Plug>(git-messenger)
 " }}}
 
 " UltiSnips {{{
