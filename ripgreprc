@@ -1,3 +1,7 @@
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
 --type-add
 ruby:*.{haml,feature,scss,coffee}*
 --smart-case
@@ -7,3 +11,5 @@ ruby:*.{haml,feature,scss,coffee}*
 --glob=!doc
 --glob=!coverage
 --glob=!.cargo
+--glob=!.git
+--hidden
