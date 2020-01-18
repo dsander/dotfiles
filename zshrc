@@ -36,6 +36,7 @@ export MANPATH="${HOMEBREW_PREFIX}/share/man:$MANPATH"
 export INFOPATH="${HOMEBREW_PREFIX}/share/info:$INFOPATH"
 export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/sbin:$PATH"
 export PATH=$HOME/.cargo/bin:$HOME/bin:$PATH
+export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # History
 if [ -z "$HISTFILE" ]; then
@@ -125,8 +126,8 @@ zplugin load zsh-users/zsh-completions
 zplugin ice wait atinit"zpcompinit; zpcdreplay" lucid
 zplugin load zdharma/fast-syntax-highlighting
 
-zplugin ice wait atload"_zsh_autosuggest_start" lucid
-zplugin load zsh-users/zsh-autosuggestions
+# zplugin ice wait atload"_zsh_autosuggest_start" lucid
+# zplugin load zsh-users/zsh-autosuggestions
 
 zplugin ice wait atload"bindkey '^[[A' history-substring-search-up; bindkey '^[[B' history-substring-search-down" lucid
 zplugin load zsh-users/zsh-history-substring-search
