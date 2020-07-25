@@ -61,7 +61,12 @@ setopt hist_verify            # show command with history expansion to user befo
 setopt inc_append_history     # add commands to HISTFILE in order of execution
 setopt share_history          # share command history data
 
-source ~/.zplugin/bin/zplugin.zsh
+if [[ -f ~/.zinit/bin/zinit.zsh ]]; then
+  source ~/.zinit/bin/zinit.zsh
+fi
+if [[ -f ~/.zplugin/bin/zplugin.zsh ]]; then
+  source ~/.zplugin/bin/zplugin.zsh
+fi
 
 # Prompt setup
 setopt promptsubst
@@ -117,8 +122,11 @@ zplugin snippet https://github.com/junegunn/fzf/blob/master/shell/completion.zsh
 zplugin ice wait lucid
 zplugin snippet https://github.com/junegunn/fzf/blob/master/shell/key-bindings.zsh
 
-zplugin ice light lucid
-zplugin load kiurchv/asdf.plugin.zsh
+zplugin ice wait lucid pick"asdf.sh"
+zplugin load @asdf-vm/asdf
+
+zplugin ice wait as"completion" lucid
+zplugin snippet ~/.asdf/completions/_asdf
 
 zplugin ice wait lucid blockf
 zplugin load zsh-users/zsh-completions
