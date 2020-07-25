@@ -621,7 +621,7 @@ call plug#begin('~/.vim/plugged')
         \ 'coc-json',
         \ 'coc-pairs',
         \ 'coc-prettier',
-        \ 'coc-rls',
+        \ 'coc-rust-analyzer',
         \ 'coc-sh',
         \ 'coc-solargraph',
         \ 'coc-tslint-plugin',
