@@ -516,7 +516,7 @@ call plug#begin('~/.vim/plugged')
 " }}}
 
 " FZF {{{
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
   let g:fzf_layout = { 'down': '~25%' }
   Plug 'pbogut/fzf-mru.vim'
