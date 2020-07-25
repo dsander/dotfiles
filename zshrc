@@ -147,7 +147,7 @@ zplugin ice as"program" pick"yank" make
 zplugin load mptre/yank
 
 zplugin ice wait lucid
-zplugin snippet "${HOMEBREW_PREFIX}/etc/profile.d/autojump.sh"
+zplugin load skywind3000/z.lua
 
 zplugin ice from"gh-r" as"program" lucid
 zplugin load junegunn/fzf-bin
