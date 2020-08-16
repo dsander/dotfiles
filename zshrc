@@ -257,7 +257,8 @@ bindkey '^g^g' fuzzy-git-shalector
 
 # User configuration
 export EDITOR=vim
-export TERM=screen-256color
+# This breaks vim in non tmux terminal on WSL
+# export TERM=screen-256color
 export DEFAULT_USER=dominik
 export BUNDLER_EDITOR=vim
 
