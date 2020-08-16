@@ -4,6 +4,8 @@
   home.packages = [
     pkgs.htop
     pkgs.ripgrep
+    pkgs.jq
+    pkgs.phantomjs2
   ];
 
   # Let Home Manager install and manage itself.
