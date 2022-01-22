@@ -109,8 +109,8 @@ zplugin snippet OMZ::plugins/bundler
 zplugin ice wait as"completion" lucid
 zplugin snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-zplugin ice wait as"completion" lucid
-zplugin snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/cargo/_cargo
+zinit ice svn wait lucid
+zinit snippet OMZP::rust
 
 zplugin ice wait as"completion" lucid
 zplugin snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/gem/_gem
@@ -134,7 +134,7 @@ zplugin ice wait lucid blockf
 zplugin load zsh-users/zsh-completions
 
 zplugin ice wait atinit"zpcompinit; zpcdreplay" lucid
-zplugin load zdharma/fast-syntax-highlighting
+zplugin load zdharma-continuum/fast-syntax-highlighting
 
 # zplugin ice wait atload"_zsh_autosuggest_start" lucid
 # zplugin load zsh-users/zsh-autosuggestions
@@ -143,7 +143,7 @@ zplugin ice wait atload"bindkey '^[[A' history-substring-search-up; bindkey '^[[
 zplugin load zsh-users/zsh-history-substring-search
 
 zplugin ice wait"2" lucid as"program" pick"bin/git-dsf"
-zplugin load zdharma/zsh-diff-so-fancy
+zplugin load zdharma-continuum/zsh-diff-so-fancy
 
 zplugin ice as"program" pick"yank" make
 zplugin load mptre/yank
