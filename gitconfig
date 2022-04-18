@@ -24,7 +24,6 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	dc = diff --cached
 	pushb = "!git push --set-upstream origin `git rev-parse --abbrev-ref HEAD`"
-	ctags = "!sh -c '[ -f .git/hooks/ctags ] || git init; .git/hooks/ctags' git-ctags"
 	branch-history = for-each-ref --sort=committerdate refs/heads/ --format='%(color: yellow)%(committerdate:short) %(color: cyan)%(refname:short)  %(color: reset)%(subject)'
 [filter "media"]
 	clean = git-media-clean %f
