@@ -384,7 +384,12 @@ call plug#begin('~/.vim/plugged')
   " context-aware pasting
   Plug 'sickill/vim-pasta'
 
+  if has("wsl")
+    let g:system_copy#paste_command='win32yank.exe -o'
+    let g:system_copy#copy_command='win32yank.exe -i'
+  endif
   " add `cp` operator to copy text to system clipboard via text object or motion
+  " `cp`/`cP` to copy, `cv`/``cV` to paste
   Plug 'christoomey/vim-system-copy'
 
   " automatically make intermediate directories if needed
@@ -417,8 +422,6 @@ call plug#begin('~/.vim/plugged')
   " remember last position in normal files, excluding commits, help, quickfix etc
   Plug 'farmergreg/vim-lastplace'
 
-  " `cp`/`cP` to copy, `cv`/``cV` to paste
-  Plug 'christoomey/vim-system-copy'
 
   " highlight the word under the cursor
   Plug 'RRethy/vim-illuminate'
