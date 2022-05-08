@@ -1,22 +1,8 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.htop
-    pkgs.ripgrep
-    pkgs.jq
-    pkgs.phantomjs2
-    pkgs.neovim
-    pkgs.dive
-    pkgs.speedtest-cli
-    pkgs.act
-    pkgs.heroku
-    pkgs.gitAndTools.delta
-    pkgs.ansible
-    # pkgs.terraform_0_15
-    pkgs.terraform
-    pkgs.gitAndTools.delta
-    pkgs.youtube-dl
+  imports = [
+    ~/.config/nixpkgs/packages.nix
   ];
 
   # Let Home Manager install and manage itself.
