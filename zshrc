@@ -89,6 +89,7 @@ typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
 typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
+    terraform
 )
 
 typeset -g POWERLEVEL9K_MODE=nerdfont-complete
@@ -281,5 +282,6 @@ alias nhssh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias nhscp="scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias vim='nvim'
+alias dokku='bash ~/code/infrastructure/dokku/contrib/dokku_client.sh'
 
 # zprof

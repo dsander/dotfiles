@@ -49,7 +49,7 @@ call plug#begin('~/.vim/plugged')
   set complete+=kspell " autocomplete with dictionary words when spell check is on
 
   " Set the persistent undo directory on temporary private fast storage.
-  let s:undoDir=$HOME . "/.vim-undodir" . $USER
+  let s:undoDir=$HOME . "/.vim-undodir"
   if !isdirectory(s:undoDir)
       call mkdir(s:undoDir, "", 0700)
   endif

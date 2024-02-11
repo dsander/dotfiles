@@ -18,8 +18,10 @@
     pkgs.act
     pkgs.heroku
     pkgs.ansible
+    pkgs.ansible-lint
     pkgs.terraform
-    pkgs.gitAndTools.delta
     pkgs.youtube-dl
+    pkgs.act
+    pkgs.sshfs
   ];
 }
