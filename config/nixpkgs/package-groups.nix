@@ -12,7 +12,6 @@
     pkgs.dive
   ];
   dev = [
-    pkgs.phantomjs2
     pkgs.dive
     pkgs.speedtest-cli
     pkgs.act
